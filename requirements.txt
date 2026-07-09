@@ -33,4 +33,3 @@ gunicorn>=23.0.0
 # Optional (Windows Local Deployment)
 # ─────────────────────────────────────────────
 # waitress>=3.0.2
-```
