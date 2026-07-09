@@ -1,24 +1,37 @@
+```text
 # AI Email Writer — Python Dependencies
-# Install with: pip install -r requirements.txt
+# Install with:
+# pip install -r requirements.txt
 
-# ─── Core Web Framework ───────────────────────
-flask>=3.0.0
-flask-cors>=4.0.0
+# ─────────────────────────────────────────────
+# Core Web Framework
+# ─────────────────────────────────────────────
+Flask>=3.0.0
+Flask-Cors>=4.0.0
 
-# ─── AI Provider SDKs (install as needed) ─────
-# OpenAI
+# ─────────────────────────────────────────────
+# AI Provider SDKs
+# ─────────────────────────────────────────────
+
+# OpenAI SDK
 openai>=1.30.0
 
-# Google Gemini
-google-generativeai>=0.7.0
+# Google Gemini (Latest SDK)
+google-genai>=1.30.0
 
-# Hugging Face (uses requests)
-# No extra package needed — requests is included below
+# ─────────────────────────────────────────────
+# Utilities
+# ─────────────────────────────────────────────
+requests>=2.31.0
+python-dotenv>=1.0.1
 
-# ─── Utilities ────────────────────────────────
-requests>=2.31.0       # HTTP client (Ollama + HuggingFace)
-python-dotenv>=1.0.0   # Load .env files for API keys
+# ─────────────────────────────────────────────
+# Production Server
+# ─────────────────────────────────────────────
+gunicorn>=23.0.0
 
-# ─── Development (optional) ───────────────────
-# gunicorn>=22.0.0      # Production WSGI server (Linux/macOS)
-# waitress>=3.0.0       # Production WSGI server (Windows)
+# ─────────────────────────────────────────────
+# Optional (Windows Local Deployment)
+# ─────────────────────────────────────────────
+# waitress>=3.0.2
+```
