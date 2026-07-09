@@ -1,0 +1,24 @@
+# AI Email Writer — Python Dependencies
+# Install with: pip install -r requirements.txt
+
+# ─── Core Web Framework ───────────────────────
+flask>=3.0.0
+flask-cors>=4.0.0
+
+# ─── AI Provider SDKs (install as needed) ─────
+# OpenAI
+openai>=1.30.0
+
+# Google Gemini
+google-generativeai>=0.7.0
+
+# Hugging Face (uses requests)
+# No extra package needed — requests is included below
+
+# ─── Utilities ────────────────────────────────
+requests>=2.31.0       # HTTP client (Ollama + HuggingFace)
+python-dotenv>=1.0.0   # Load .env files for API keys
+
+# ─── Development (optional) ───────────────────
+# gunicorn>=22.0.0      # Production WSGI server (Linux/macOS)
+# waitress>=3.0.0       # Production WSGI server (Windows)

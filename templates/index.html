@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="AI Email Writer — Generate professional emails instantly using AI. Choose tone, type, and language. Free and fast." />
+  <title>AI Email Writer — Generate Professional Emails Instantly</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+
+  <!-- Favicon (inline SVG data-URI) -->
+  <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>✉️</text></svg>" />
+</head>
+
+<body>
+  <!-- ══════════════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════════════ -->
+  <header class="app-header" role="banner">
+    <div class="header-inner container">
+      <!-- Brand -->
+      <a href="/" class="brand" aria-label="AI Email Writer home">
+        <span class="brand-icon" aria-hidden="true">✉️</span>
+        <span class="brand-name">AI <span class="highlight">Email Writer</span></span>
+      </a>
+
+      <!-- Status badge -->
+      <div class="header-actions">
+        <div id="provider-badge" class="provider-badge" title="Active AI provider">
+          <span class="badge-dot"></span>
+          <span id="provider-name">Loading…</span>
+        </div>
+
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════
+       HERO SECTION
+  ══════════════════════════════════════════════════ -->
+  <section class="hero" aria-label="Application introduction">
+    <div class="container hero-inner">
+      <div class="hero-badge">✨ AI-Powered Email Generation</div>
+      <h1 class="hero-title">
+        Write Perfect Emails<br />
+        <span class="gradient-text">in Seconds with AI</span>
+      </h1>
+      <p class="hero-subtitle">
+        Generate polished, professional emails for any situation — job applications,
+        business proposals, follow-ups, and more. Just fill in the details and let AI do the writing.
+      </p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">16+</span><span class="stat-lbl">Email Types</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">9</span><span class="stat-lbl">Tone Options</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">13</span><span class="stat-lbl">Languages</span></div>
+      </div>
+    </div>
+    <!-- Floating orbs (decorative) -->
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+    <div class="orb orb-3" aria-hidden="true"></div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       MAIN APP LAYOUT
+  ══════════════════════════════════════════════════ -->
+  <main class="container app-layout" id="main-content">
+
+    <!-- ╔══════════════════════════════╗
+         ║   LEFT — INPUT FORM          ║
+         ╚══════════════════════════════╝ -->
+    <section class="card form-card" aria-label="Email configuration form">
+
+      <div class="card-header">
+        <h2 class="card-title">
+          <span class="card-icon" aria-hidden="true">⚙️</span>
+          Configure Your Email
+        </h2>
+        <button id="btn-clear"
+                class="btn btn-ghost btn-sm"
+                type="button"
+                aria-label="Clear all form fields">
+          🗑️ Clear
+        </button>
+      </div>
+
+      <form id="email-form" novalidate aria-label="Email generation form">
+
+        <!-- Row 1: Subject + Recipient -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="subject" class="form-label">
+              Email Subject <span class="required" aria-label="required">*</span>
+            </label>
+            <input id="subject"
+                   name="subject"
+                   type="text"
+                   class="form-input"
+                   placeholder="e.g. Request for Project Meeting"
+                   maxlength="200"
+                   required
+                   aria-required="true" />
+            <div class="char-counter" id="subject-counter">0 / 200</div>
+          </div>
+
+          <div class="form-group">
+            <label for="recipient_name" class="form-label">
+              Recipient Name <span class="required" aria-label="required">*</span>
+            </label>
+            <input id="recipient_name"
+                   name="recipient_name"
+                   type="text"
+                   class="form-input"
+                   placeholder="e.g. John Smith"
+                   maxlength="100"
+                   required
+                   aria-required="true" />
+          </div>
+        </div>
+
+        <!-- Row 2: Sender -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sender_name" class="form-label">
+              Your Name <span class="required" aria-label="required">*</span>
+            </label>
+            <input id="sender_name"
+                   name="sender_name"
+                   type="text"
+                   class="form-input"
+                   placeholder="e.g. Jane Doe"
+                   maxlength="100"
+                   required
+                   aria-required="true" />
+          </div>
+
+          <div class="form-group">
+            <label for="email_type" class="form-label">
+              Email Type <span class="required" aria-label="required">*</span>
+            </label>
+            <select id="email_type" name="email_type" class="form-select" required aria-required="true">
+              <option value="" disabled selected>Select type…</option>
+              <option value="Professional">Professional</option>
+              <option value="Business">Business</option>
+              <option value="Formal">Formal</option>
+              <option value="Informal">Informal</option>
+              <option value="Friendly">Friendly</option>
+              <option value="Job Application">Job Application</option>
+              <option value="Internship Request">Internship Request</option>
+              <option value="Leave Request">Leave Request</option>
+              <option value="Complaint">Complaint</option>
+              <option value="Apology">Apology</option>
+              <option value="Thank You">Thank You</option>
+              <option value="Meeting Request">Meeting Request</option>
+              <option value="Follow-up">Follow-up</option>
+              <option value="Customer Support">Customer Support</option>
+              <option value="Sales">Sales</option>
+              <option value="Marketing">Marketing</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 3: Tone + Language -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tone" class="form-label">
+              Tone <span class="required" aria-label="required">*</span>
+            </label>
+            <div class="tone-grid" role="group" aria-label="Select tone">
+              <button type="button" class="tone-btn" data-tone="Professional">Professional</button>
+              <button type="button" class="tone-btn" data-tone="Friendly">Friendly</button>
+              <button type="button" class="tone-btn" data-tone="Formal">Formal</button>
+              <button type="button" class="tone-btn" data-tone="Casual">Casual</button>
+              <button type="button" class="tone-btn" data-tone="Confident">Confident</button>
+              <button type="button" class="tone-btn" data-tone="Persuasive">Persuasive</button>
+              <button type="button" class="tone-btn" data-tone="Polite">Polite</button>
+              <button type="button" class="tone-btn" data-tone="Apologetic">Apologetic</button>
+              <button type="button" class="tone-btn" data-tone="Enthusiastic">Enthusiastic</button>
+            </div>
+            <!-- Hidden input holds the selected tone value -->
+            <input type="hidden" id="tone" name="tone" value="" required />
+          </div>
+
+          <div class="form-group">
+            <label for="language" class="form-label">
+              Language <span class="required" aria-label="required">*</span>
+            </label>
+            <select id="language" name="language" class="form-select" required aria-required="true">
+              <option value="English" selected>🇬🇧 English</option>
+              <option value="Spanish">🇪🇸 Spanish</option>
+              <option value="French">🇫🇷 French</option>
+              <option value="German">🇩🇪 German</option>
+              <option value="Italian">🇮🇹 Italian</option>
+              <option value="Portuguese">🇵🇹 Portuguese</option>
+              <option value="Dutch">🇳🇱 Dutch</option>
+              <option value="Russian">🇷🇺 Russian</option>
+              <option value="Japanese">🇯🇵 Japanese</option>
+              <option value="Chinese">🇨🇳 Chinese</option>
+              <option value="Arabic">🇸🇦 Arabic</option>
+              <option value="Hindi">🇮🇳 Hindi</option>
+              <option value="Korean">🇰🇷 Korean</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Purpose (full width) -->
+        <div class="form-group">
+          <label for="purpose" class="form-label">
+            Purpose / Description <span class="required" aria-label="required">*</span>
+          </label>
+          <textarea id="purpose"
+                    name="purpose"
+                    class="form-textarea"
+                    rows="4"
+                    maxlength="1000"
+                    placeholder="Describe what this email should accomplish. E.g. 'Request a one-on-one meeting to discuss Q3 progress and upcoming product roadmap.'"
+                    required
+                    aria-required="true"></textarea>
+          <div class="textarea-footer">
+            <span class="word-counter" id="purpose-word-counter">0 words</span>
+            <span class="char-counter" id="purpose-counter">0 / 1000</span>
+          </div>
+        </div>
+
+        <!-- Additional Instructions -->
+        <div class="form-group">
+          <label for="additional_instructions" class="form-label">
+            Additional Instructions
+            <span class="optional-tag">optional</span>
+          </label>
+          <textarea id="additional_instructions"
+                    name="additional_instructions"
+                    class="form-textarea form-textarea--sm"
+                    rows="2"
+                    maxlength="500"
+                    placeholder="Any specific points to include, phrases to avoid, required length, etc."></textarea>
+          <div class="char-counter" id="instructions-counter">0 / 500</div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="form-actions">
+          <button id="btn-generate"
+                  type="submit"
+                  class="btn btn-primary btn-lg"
+                  aria-label="Generate email">
+            <span class="btn-icon-left" aria-hidden="true">✨</span>
+            Generate Email
+          </button>
+
+          <button id="btn-regenerate"
+                  type="button"
+                  class="btn btn-secondary btn-lg hidden"
+                  aria-label="Regenerate email">
+            🔄 Regenerate
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+    <!-- ╔══════════════════════════════╗
+         ║   RIGHT — OUTPUT PANEL       ║
+         ╚══════════════════════════════╝ -->
+    <section class="card output-card" aria-label="Generated email output" aria-live="polite">
+
+      <div class="card-header">
+        <h2 class="card-title">
+          <span class="card-icon" aria-hidden="true">📧</span>
+          Generated Email
+        </h2>
+        <div class="output-actions hidden" id="output-actions">
+          <button id="btn-copy"
+                  class="btn btn-ghost btn-sm"
+                  type="button"
+                  aria-label="Copy email to clipboard">
+            📋 Copy
+          </button>
+          <button id="btn-download"
+                  class="btn btn-ghost btn-sm"
+                  type="button"
+                  aria-label="Download email as text file">
+            💾 Download
+          </button>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div id="output-empty" class="output-empty" role="status">
+        <div class="empty-icon" aria-hidden="true">✉️</div>
+        <p class="empty-title">Your email will appear here</p>
+        <p class="empty-desc">Fill in the form on the left and click <strong>Generate Email</strong> to get started.</p>
+      </div>
+
+      <!-- Loading state -->
+      <div id="output-loading" class="output-loading hidden" role="status" aria-label="Generating email">
+        <div class="loader-ring" aria-hidden="true">
+          <div></div><div></div><div></div><div></div>
+        </div>
+        <p class="loading-title">Crafting your email…</p>
+        <p class="loading-steps" id="loading-steps">Analysing your request</p>
+      </div>
+
+      <!-- Error state -->
+      <div id="output-error" class="output-error hidden" role="alert">
+        <div class="error-icon" aria-hidden="true">⚠️</div>
+        <p class="error-title">Something went wrong</p>
+        <p class="error-msg" id="error-msg-text"></p>
+        <div class="error-detail" id="error-detail" style="display:none"></div>
+      </div>
+
+      <!-- Email result -->
+      <div id="output-result" class="output-result hidden">
+
+        <div class="email-meta">
+          <div id="result-email-type" class="email-type-badge"></div>
+          <div id="result-tone" class="tone-badge"></div>
+        </div>
+
+        <div class="email-section">
+          <div class="email-label">Subject</div>
+          <div id="result-subject" class="email-subject"></div>
+        </div>
+
+        <div class="email-divider" aria-hidden="true"></div>
+
+        <div class="email-section">
+          <div class="email-label">Greeting</div>
+          <div id="result-greeting" class="email-content email-greeting"></div>
+        </div>
+
+        <div class="email-section">
+          <div class="email-label">Body</div>
+          <div id="result-body" class="email-content email-body"></div>
+        </div>
+
+        <div class="email-section">
+          <div class="email-label">Closing</div>
+          <div id="result-closing" class="email-content"></div>
+        </div>
+
+        <div class="email-section">
+          <div class="email-label">Signature</div>
+          <div id="result-signature" class="email-content email-signature"></div>
+        </div>
+
+        <div class="email-stats">
+          <span id="stats-words">0 words</span>
+          <span class="stats-divider">·</span>
+          <span id="stats-chars">0 characters</span>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ══════════════════════════════════════════════════
+       TOAST NOTIFICATION
+  ══════════════════════════════════════════════════ -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>
+        Built with ❤️ using
+        <strong>Python</strong>, <strong>Flask</strong>, and <strong>Vanilla JS</strong>
+        · AI Email Writer v1.0
+      </p>
+    </div>
+  </footer>
+
+  <!-- Main JS -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
